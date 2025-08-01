@@ -21,11 +21,24 @@ connectCloudinary()
 
 // middlewares
 app.use(express.json())
-// app.use(cors({
-//   origin : {
+const allowedOrigins = [
+  'https://parijaat-website-eta.vercel.app',                // local Vite dev server
+  'https://parijaat-admin-eup5.vercel.app'       // production frontend
+];
 
-//   }
-// }))
+// app.use(cors());
+
+
+app.use(cors({
+  origin: function (origin, callback) {
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true); // Allow the request
+    } else {
+      callback(new Error('Not allowed by CORS')); // Block the request
+    }
+  },
+  credentials: true // Required if using cookies/auth headers
+}));
 
 // api endpoints
 app.use("/api/user", userRouter)
