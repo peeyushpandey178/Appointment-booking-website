@@ -38,7 +38,7 @@ const ChatArea = () => {
     try {
       // Get AI response
       const result = await axios.post(
-        "http://localhost:4000/api/user/geminiTalk",
+        "https://appointment-booking-website-fpfv.onrender.com/api/user/geminiTalk",
         { prompt: input }
       );
       
